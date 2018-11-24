@@ -1,0 +1,49 @@
+﻿Task 4
+<#
+1) Find Event Logs from Log name: System with past 12 hrs
+
+PSUDOCODE
+get the eventlog and store in variable
+#>
+Get-EventLog -LogName System | Where-Object {$_.Log -lt  }
+
+
+<# Task 2) Find all the files from temp folder 
+
+and count the files
+
+#>
+
+$TempFiles=Get-ChildItem -Path "C:\temp"
+$TempFiles.Count
+
+<# Task 3) Get all files from a C:\windows\system32 only dll files and unblock all the files
+
+#>
+
+$a= Get-ChildItem -Path "C:\Windows\System32\*.dll" 
+$a | Unblock-File
+
+<# Create 20 files with .log extentsion and change the extension of the files to .txt using Loops or pipline
+
+#>
+
+$a=1
+$b=20
+
+for($a=1; $a -le $b; $a++)
+
+{
+New-Item -Path "C:\Test\Demo1\Files" -Name "Test($a).txt" -ItemType File
+      }
+
+$TextFiles=Get-ChildItem -Path "C:\Test\Demo1\Files"
+Foreach($TextFile in $TextFiles)
+{
+
+Rename-Item -Path "C:\Test\Demo1\Files" -NewName Test($TextFile.Name)
+        }
+
+
+
+
